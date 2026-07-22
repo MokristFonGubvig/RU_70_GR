@@ -343,10 +343,12 @@ function load(){
 
 // RU songs
 const ru_1970_gr_icon = [
-	'pop'
+	'pop',
+	'ru_via'
 ];
 
 const RU_1970_GR_PACK_1 = 1;
+const RU_1970_GR_PACK_2 = 2;
 
 let ru_1970_gr = [
 		{
@@ -355,43 +357,105 @@ let ru_1970_gr = [
 			song : 'Синий лес (1973)'
 		},
 		{
-			pack : RU_1970_GR_PACK_1,
+			pack : RU_1970_GR_PACK_2,
 			group : 'ВИА Синяя птица',
 			song : 'Горько (1977)'
 		},
 		{
-			pack : RU_1970_GR_PACK_1,
+			pack : RU_1970_GR_PACK_2,
 			group : 'ВИА Синяя птица',
 			song : 'Клён (1975)'
 		},
 		{
-			pack : RU_1970_GR_PACK_1,
+			pack : RU_1970_GR_PACK_2,
 			group : 'ВИА Самоцветы',
 			song : 'Всё, что в жизни есть у меня (1977)'
 		},
 		{
-			pack : RU_1970_GR_PACK_1,
+			pack : RU_1970_GR_PACK_2,
 			group : 'ВИА Самоцветы',
 			song : 'Мой адрес (1973)'
 		},
 		{
-			pack : RU_1970_GR_PACK_1,
+			pack : RU_1970_GR_PACK_2,
 			group : 'ВИА Самоцветы',
 			song : 'Вся жизнь впереди (1975)'
 		},
 		{
-			pack : RU_1970_GR_PACK_1,
+			pack : RU_1970_GR_PACK_2,
 			group : 'ВИА Голубые гитары',
 			song : 'Ветер северный (1971)'
 		},
 		{
-			pack : RU_1970_GR_PACK_1,
+			pack : RU_1970_GR_PACK_2,
 			group : 'ВИА Голубые гитары',
 			song : 'Первый поцелуй (1971)'
+		},
+		{
+			pack : RU_1970_GR_PACK_1,
+			group : 'Аккорд',
+			song : 'Пингвины (1965)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Красные маки',
+			song : 'Всё, что было (1979)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Поющие гитары',
+			song : 'Нет тебя прекрасней (1971)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Поющие сердца',
+			song : 'Стучись в любую дверь (1975)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Песняры',
+			song : 'Беловежская пуща (1978)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Песняры',
+			song : 'Белоруссия (1976)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Песняры',
+			song : 'За полчаса до весны (1976)',
+			ignore : true
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Орион',
+			song : 'Иволга (1973)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Песняры',
+			song : 'Вологда (1976)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Веселые ребята',
+			song : 'В последний раз (1979)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Веселые ребята',
+			song : 'Алёшкина любовь (1970)'
+		},
+		{
+			pack : RU_1970_GR_PACK_2,
+			group : 'ВИА Сябры',
+			song : 'Мне снится лето (1978)'
 		}
 ];
 
 let ru_1970_gr_1 =	ru_1970_gr.filter(item => item.pack == 1);
+let ru_1970_gr_2 =	ru_1970_gr.filter(item => item.pack == 2);
 
 let music = [
 	{
@@ -403,6 +467,10 @@ let music = [
 				{
 					arr: ru_1970_gr_1,
 					name: 'RU 1970s Group: Pop'
+				},
+				{
+					arr: ru_1970_gr_2,
+					name: 'RU 1970s Group: VIA'
 				}
 			]
 	}
@@ -416,6 +484,7 @@ function map_songs(){
 	$('#mirror').hide();
 	$('#map').hide();
 	$('#package_content').hide();
+	$('#sec_15_hist').show();
 	$('#mapping_content').show();
 	toggleLearn();
 	for(var j=0; j < music.length; j++){
@@ -763,6 +832,15 @@ function back_to_browser(){
 function back_to_current_pack(){
 	back = back_to_browser;
 	$('#mapping_content').hide();
+	$('#sec_15_hist').hide();
+	song_stop();
 	$('#map').show();
 	package_num(pack_num);
+}
+
+function song_stop() {
+	if(audio){
+		audio.pause();
+		audio = null;
+	}
 }
